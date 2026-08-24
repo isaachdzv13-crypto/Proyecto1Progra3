@@ -1,6 +1,6 @@
 package modelo;
 
-public  class Usuario {
+public abstract class Usuario {
 
     public enum Rol{
         ADMINISTRADOR,
@@ -42,7 +42,8 @@ public  class Usuario {
     }
 
 
+    @Override
     public String toString() {
-        return "Usuario{id='" + id + "', rol=" + rol + "}";
+        return "Usuario{ id='" + id + "', rol=" + rol + "}";
     }
 }

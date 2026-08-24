@@ -4,8 +4,8 @@ public class Funcionario extends Usuario{
     private String nombre;
     private String telefono;
 
-    public Funcionario(String id, String clave, Rol rol,String nombre,String telefono) {
-        super(id, clave, rol);
+    public Funcionario(String id,String nombre,String telefono) {
+        super(id, id, Rol.FUNCIONARIO);
         this.nombre = nombre;
         this.telefono = telefono;
     }
@@ -24,5 +24,9 @@ public class Funcionario extends Usuario{
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+    @Override
+    public String toString() {
+        return "Funcionario{id='" + getId() + ", nombre= "+getNombre() +", telefono= "+ getTelefono()+ "'}";
     }
 }
