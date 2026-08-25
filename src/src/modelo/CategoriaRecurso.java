@@ -1,12 +1,12 @@
 package modelo;
 
 public class CategoriaRecurso {
-
+    private static int contador = 1;
     private String desc;
     private String id;
 
     CategoriaRecurso(String id, String desc){
-        this.id=id;
+        this.id=generarId();
         this.desc=desc;
 
     }
@@ -30,7 +30,9 @@ public class CategoriaRecurso {
     }
 
 
-
+    private String generarId() {
+        return String.format("CAT-%06d", contador++);
+    }
 
 
 

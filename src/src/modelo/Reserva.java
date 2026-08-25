@@ -79,6 +79,7 @@ public class Reserva {
     private LocalTime horaInicio;
     private LocalTime horaFin;
     private LocalDate fecha;
+    private List<Recurso> listaRecursos;
 
     Reserva(String idFuncionario, String idReserva,String descripcion,String actvidad, LocalTime inicio, LocalTime hFinal, LocalDate fecha){
         this.idFuncionario=idFuncionario;
@@ -88,6 +89,7 @@ public class Reserva {
         this.horaInicio=inicio;
         this.horaFin=hFinal;
         this.fecha=fecha;
+
 
     }
 
