@@ -5,7 +5,7 @@ public class CategoriaRecurso {
     private String desc;
     private String id;
 
-    CategoriaRecurso(String id, String desc){
+    public CategoriaRecurso(String desc){
         this.id=generarId();
         this.desc=desc;
 
