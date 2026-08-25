@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class ListaRecursos {
-    private List<Recurso> listaRecu;
+    private final List<Recurso> listaRecu;
 
     public ListaRecursos(){
         listaRecu= new ArrayList<>();
