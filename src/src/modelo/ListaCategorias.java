@@ -24,10 +24,10 @@ public class ListaCategorias {
     return null;
 
     }
-    void addCategoria(CategoriaRecurso c){
+    public void addCategoria(CategoriaRecurso c){
         listaCat.add(c);
     }
-    boolean borrarCategoria(String desc){
+    public boolean borrarCategoria(String desc){
         CategoriaRecurso borr = busquedadDescripcion(desc);
 
         if (borr != null) {
@@ -37,6 +37,12 @@ public class ListaCategorias {
 
         return false;
 
+    }
+    public CategoriaRecurso buscarPorId(String id){
+        for (CategoriaRecurso c : listaCat){
+            if (Objects.equals(c.getId(), id)) return c;
+        }
+        return null;
     }
 //    String consultaCategorias(){
 //

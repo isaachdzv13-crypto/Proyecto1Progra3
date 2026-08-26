@@ -36,5 +36,15 @@ public class ListaFuncionarios {
 
         return null;
     }
+    public List<Funcionario> buscarPorNombre(String nombre) {
+        List<Funcionario> res = new ArrayList<>();
+        for (Funcionario f : listaFuncionarios) {
+            if (nombre == null || nombre.isBlank()
+                    || f.getNombre().toLowerCase().contains(nombre.toLowerCase())) {
+                res.add(f);
+            }
+        }
+        return res;
+    }
 
 }

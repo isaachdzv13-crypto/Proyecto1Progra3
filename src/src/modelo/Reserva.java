@@ -81,6 +81,15 @@ public class Reserva {
     private LocalDate fecha;
     private List<Recurso> listaRecursos;
 
+    public Estado getEstado() {
+        return estado;
+    }
+    public void setEstado(Estado s){this.estado=s ;
+    }
+
+    public enum Estado { ACTIVA, CANCELADA }
+    private Estado estado = Estado.ACTIVA;
+
     public Reserva(String idFuncionario, String idReserva,String descripcion,String actvidad, LocalTime inicio, LocalTime hFinal, LocalDate fecha){
         this.idFuncionario=idFuncionario;
         this.idReserva=idReserva;
