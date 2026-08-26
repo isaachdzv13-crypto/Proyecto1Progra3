@@ -7,7 +7,7 @@ import java.util.Objects;
 public class ListaFuncionarios {
     private List<Funcionario> listaFuncionarios;
 
-    ListaFuncionarios(){
+    public ListaFuncionarios(){
         listaFuncionarios= new ArrayList<>();
     }
     public void addRecurso(Funcionario func) {

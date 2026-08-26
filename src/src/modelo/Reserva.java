@@ -81,7 +81,7 @@ public class Reserva {
     private LocalDate fecha;
     private List<Recurso> listaRecursos;
 
-    Reserva(String idFuncionario, String idReserva,String descripcion,String actvidad, LocalTime inicio, LocalTime hFinal, LocalDate fecha){
+    public Reserva(String idFuncionario, String idReserva,String descripcion,String actvidad, LocalTime inicio, LocalTime hFinal, LocalDate fecha){
         this.idFuncionario=idFuncionario;
         this.idReserva=idReserva;
         this.descripcion=descripcion;
