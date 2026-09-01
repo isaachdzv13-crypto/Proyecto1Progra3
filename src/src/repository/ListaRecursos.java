@@ -1,4 +1,7 @@
-package modelo;
+package repository;
+
+import model.CategoriaRecurso;
+import model.Recurso;
 
 import java.util.ArrayList;
 import java.util.List;

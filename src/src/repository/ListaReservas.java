@@ -1,4 +1,6 @@
-package modelo;
+package repository;
+
+import model.Reserva;
 
 import java.util.ArrayList;
 import java.util.List;

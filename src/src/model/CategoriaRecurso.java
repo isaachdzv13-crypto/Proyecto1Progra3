@@ -1,4 +1,4 @@
-package modelo;
+package model;
 
 public class CategoriaRecurso {
     private static int contador = 1;
