@@ -3,6 +3,7 @@ package controllers;
 import model.Administrador;
 import model.Funcionario;
 import model.Usuario;
+import view.FrameAdminPrincipal;
 import view.LoginFrame;
 import view.PasswordChangeFrame;
 
@@ -52,7 +53,7 @@ public class LoginController {
             JOptionPane.showMessageDialog(vista,"Bienvenido administrador.");
 
             // Abrir ventana del administrador
-            // new AdminFrame((Administrador) usuario).setVisible(true);
+             new FrameAdminPrincipal((Administrador) usuario).setVisible(true);
 
 
 

@@ -1,6 +1,6 @@
 package model;
 
-import exceptions.SystemExcep;
+
 
 public abstract class Usuario {
 

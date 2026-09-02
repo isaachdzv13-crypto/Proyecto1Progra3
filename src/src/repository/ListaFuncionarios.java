@@ -57,5 +57,7 @@ public class ListaFuncionarios {
         }
         return null;
     }
-
+    public List<Funcionario> listarTodos() {
+        return new ArrayList<>(listaFuncionarios);
+    }
 }

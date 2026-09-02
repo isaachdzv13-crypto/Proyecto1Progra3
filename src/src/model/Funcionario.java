@@ -1,6 +1,6 @@
 package model;
 
-import exceptions.SystemExcep;
+
 
 public class Funcionario extends Usuario{
     private String nombre;
