@@ -49,4 +49,13 @@ public class ListaFuncionarios {
         return res;
     }
 
+    public Funcionario buscarPorContrasenia(String contra){
+        for(Funcionario f: listaFuncionarios) {
+        if(Objects.equals(f.getClave(), contra))
+            return f;
+
+        }
+        return null;
+    }
+
 }

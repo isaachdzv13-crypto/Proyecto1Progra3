@@ -16,8 +16,23 @@ private JPasswordField password;
     );
 
 
+
+    public JButton limpiar= Themes.button("Limpiar",Themes.PRIMARY);
+
+    public JButton cambiarClave=Themes.button("Cambiar",Themes.PRIMARY);
+
+
     public LoginFrame(){
-        iniciar.setBounds(180, 225, 220, 40);
+        iniciar.setBounds(180, 225, 120, 40);
+        limpiar.setBounds(40, 225, 120, 40);
+        cambiarClave.setBounds(320,225,120,40);
+
+        limpiar.addActionListener(e -> {
+            id.setText("");
+            password.setText("");
+        });
+
+
     setTitle("Sistema de Reserva de Recursos - Inicio de sesión");
     setDefaultCloseOperation(EXIT_ON_CLOSE);
     setSize(500, 350);
@@ -78,15 +93,22 @@ login.add(demo);
     login.add(lblPassword);
     login.add(password);
     login.add(iniciar);
+        login.add(limpiar);
+        login.add(cambiarClave);
 login.add(chkMostrar);
     add(login);
 }
+
+
+
+
+
     public static void main(String[] args) {
         Themes.install();
 
         SwingUtilities.invokeLater(() -> {
             LoginFrame ventana = new LoginFrame();
-            new LoginController(ventana);
+            new LoginController(ventana,null);
             ventana.setVisible(true);
         });
     }

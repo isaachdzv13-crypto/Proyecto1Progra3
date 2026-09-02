@@ -4,21 +4,28 @@ import model.Administrador;
 import model.Funcionario;
 import model.Usuario;
 import view.LoginFrame;
+import view.PasswordChangeFrame;
 
 import javax.swing.*;
 
 public class LoginController {
     private final LoginFrame vista;
-
-    public LoginController(LoginFrame view) {
+    private final PasswordChangeFrame cambioContra;
+    public LoginController(LoginFrame view, PasswordChangeFrame cambioContra) {
         this.vista = view;
+        this.cambioContra = cambioContra;
         view.iniciar.addActionListener(e -> {
             String id = view.getId();
             String clave = view.getClave();
 
             iniciarSesion(id, clave);
         });
+        view.cambiarClave.addActionListener(e->abrirCambiarClave());
+
+
     }
+
+
     public void iniciarSesion(String id, String clave) {
 
         if (id == null || id.isBlank()) {
@@ -80,5 +87,9 @@ public class LoginController {
         }
 
         return null;
+    }
+    private void abrirCambiarClave() {
+        PasswordChangeFrame ventana = new PasswordChangeFrame();
+        ventana.setVisible(true);
     }
 }
