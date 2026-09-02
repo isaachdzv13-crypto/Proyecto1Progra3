@@ -1,6 +1,7 @@
 package view;
 
 import Theme.Themes;
+import controllers.LoginController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,9 +10,14 @@ public class LoginFrame extends JFrame {
 private JTextField id;
 private JPasswordField password;
     public final JCheckBox chkMostrar = new JCheckBox("Mostrar contraseña");
+    public JButton iniciar = Themes.button(
+            "Iniciar sesión",
+            Themes.PRIMARY
+    );
 
 
     public LoginFrame(){
+        iniciar.setBounds(180, 225, 220, 40);
     setTitle("Sistema de Reserva de Recursos - Inicio de sesión");
     setDefaultCloseOperation(EXIT_ON_CLOSE);
     setSize(500, 350);
@@ -60,11 +66,7 @@ private JPasswordField password;
 
 
     // Botón
-    JButton iniciar = Themes.button(
-            "Iniciar sesión",
-            Themes.PRIMARY
-    );
-    iniciar.setBounds(180, 225, 220, 40);
+
 
     // Agregar
     login.add(entrada);
@@ -79,10 +81,19 @@ login.add(chkMostrar);
 }
     public static void main(String[] args) {
         Themes.install();
+
         SwingUtilities.invokeLater(() -> {
             LoginFrame ventana = new LoginFrame();
+            new LoginController(ventana);
             ventana.setVisible(true);
         });
     }
 
+    public String getId() {
+        return id.getText();
+    }
+
+    public String getClave() {
+        return new String(password.getPassword());
+    }
 }
