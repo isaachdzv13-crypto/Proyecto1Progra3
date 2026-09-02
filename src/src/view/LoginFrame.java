@@ -67,7 +67,9 @@ private JPasswordField password;
 
     // Botón
 
-
+JLabel demo= new JLabel("Admin: admin/1234. Usuario: 1234/1234");
+demo.setBounds(180,275,300,40);
+login.add(demo);
     // Agregar
     login.add(entrada);
     login.add(saludo);
