@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.SystemExcep;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -40,12 +42,12 @@ public class Reserva {
         this.descripcion = descripcion;
     }
 
-    public String getActividad() {
-        return Actividad;
+    public String getactividad() {
+        return actividad;
     }
 
-    public void setActividad(String actividad) {
-        Actividad = actividad;
+    public void setactividad(String actividad) {
+        actividad = actividad;
     }
 
     public LocalTime getHoraInicio() {
@@ -75,7 +77,7 @@ public class Reserva {
     private String idFuncionario;
     private String idReserva;
     private String descripcion;
-    private String Actividad;
+    private final String actividad;
     private LocalTime horaInicio;
     private LocalTime horaFin;
     private LocalDate fecha;
@@ -90,16 +92,45 @@ public class Reserva {
     public enum Estado { ACTIVA, CANCELADA }
     private Estado estado = Estado.ACTIVA;
 
-    public Reserva(String idFuncionario, String idReserva,String descripcion,String actvidad, LocalTime inicio, LocalTime hFinal, LocalDate fecha){
+    public Reserva(String idFuncionario, String idReserva,String descripcion,String actividad, LocalTime inicio, LocalTime hFinal, LocalDate fecha)  {
+
+        if (idFuncionario == null || idFuncionario.isBlank()) {
+            throw new IllegalArgumentException("El ID del funcionario es obligatorio");
+        }
+
+        if (idReserva == null || idReserva.isBlank()) {
+            throw new IllegalArgumentException("El ID de la reserva es obligatorio");
+        }
+
+        if (descripcion == null || descripcion.isBlank()) {
+            throw new IllegalArgumentException("La descripción es obligatoria");
+        }
+
+        if (actividad == null || actividad.isBlank()) {
+            throw new IllegalArgumentException("La actividad es obligatoria");
+        }
+
+        if (inicio == null || hFinal == null) {
+            throw new IllegalArgumentException("Las horas son obligatorias");
+        }
+
+        if (!hFinal.isAfter(inicio)) {
+            throw new IllegalArgumentException(
+                    "La hora final debe ser posterior a la hora de inicio"
+            );
+        }
+
+        if (fecha == null) {
+            throw new IllegalArgumentException("La fecha es obligatoria");
+        }
         this.idFuncionario=idFuncionario;
         this.idReserva=idReserva;
         this.descripcion=descripcion;
-        this.Actividad=actvidad;
+        this.actividad=actividad;
         this.horaInicio=inicio;
         this.horaFin=hFinal;
         this.fecha=fecha;
-
-
+        
     }
 
 }

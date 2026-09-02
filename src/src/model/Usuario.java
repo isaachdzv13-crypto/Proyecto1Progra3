@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.SystemExcep;
+
 public abstract class Usuario {
 
     public enum Rol{
@@ -11,7 +13,14 @@ public abstract class Usuario {
     private Rol rol;
 
 
-    public Usuario(String id, String clave, Rol rol) {
+    public Usuario(String id, String clave, Rol rol)   {
+        if (id == null || id.isBlank()) {
+            throw new IllegalArgumentException("El ID del usuario es obligatorio");
+        }
+        if (clave == null || clave.isBlank()) {
+            throw new IllegalArgumentException("La clave del usuario es obligatorio");
+        }
+
         this.id = id;
         this.clave = clave;
         this.rol = rol;

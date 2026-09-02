@@ -1,10 +1,12 @@
 package model;
 
+import exceptions.SystemExcep;
+
 public class Funcionario extends Usuario{
     private String nombre;
     private String telefono;
 
-    public Funcionario(String id,String nombre,String telefono) {
+    public Funcionario(String id,String nombre,String telefono)  {
         super(id, id, Rol.FUNCIONARIO);
         this.nombre = nombre;
         this.telefono = telefono;
