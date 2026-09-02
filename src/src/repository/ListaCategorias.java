@@ -1,6 +1,7 @@
 package repository;
 
 import model.CategoriaRecurso;
+import model.Funcionario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,14 +47,19 @@ public class ListaCategorias {
         }
         return null;
     }
-//    String consultaCategorias(){
-//
-//        if(listaCat.isEmpty()){
-//            return "La lista esta vacia";
-//        }
-//         return
-//
-//
-//    }
+    public List<CategoriaRecurso> listarTodas() {
+        return new ArrayList<>(listaCat);
+    }
 
+    public List<CategoriaRecurso> buscarPorDescripcion(String desc) {
+        List<CategoriaRecurso> res = new ArrayList<>();
+        for (CategoriaRecurso c : listaCat){
+            if (desc == null || desc.isBlank()
+                    || c.getDesc().toLowerCase().contains(desc.toLowerCase())){
+                res.add(c);
+            }
+        }
+        return res;
+
+    }
 }

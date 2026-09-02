@@ -1,5 +1,6 @@
 package view;
 
+import controllers.CategoriasController;
 import controllers.FuncionariosController;
 import model.Administrador;
 
@@ -21,8 +22,11 @@ public class FrameAdminPrincipal extends JFrame {
         new FuncionariosController(funcionariosPanel);
         tabs.addTab("Funcionarios", funcionariosPanel);
 
+        CategoriasPanel categorias= new CategoriasPanel();
+        new CategoriasController(categorias);
+        tabs.addTab("Categorias",categorias);
 
-add(funcionariosPanel);
+add(tabs);
 
     }
 }
