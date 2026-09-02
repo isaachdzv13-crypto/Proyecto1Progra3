@@ -58,7 +58,7 @@ public class LoginController {
             // new FuncionarioFrame((Funcionario) usuario).setVisible(true);
         }
     }
-
+//aa
     private Usuario validarCredenciales(String id, String clave) {
 
         Administrador admin =
