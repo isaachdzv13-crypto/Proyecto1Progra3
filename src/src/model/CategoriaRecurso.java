@@ -34,6 +34,9 @@ public class CategoriaRecurso {
         return String.format("CAT-%06d", contador++);
     }
 
-
+    @Override
+    public String toString() {
+        return desc;
+    }
 
 }

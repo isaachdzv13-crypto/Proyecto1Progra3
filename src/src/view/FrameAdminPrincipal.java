@@ -2,6 +2,7 @@ package view;
 
 import controllers.CategoriasController;
 import controllers.FuncionariosController;
+import controllers.RecursosController;
 import model.Administrador;
 
 import javax.swing.*;
@@ -25,6 +26,10 @@ public class FrameAdminPrincipal extends JFrame {
         CategoriasPanel categorias= new CategoriasPanel();
         new CategoriasController(categorias);
         tabs.addTab("Categorias",categorias);
+
+        RecursosPanel recursos= new RecursosPanel();
+        new RecursosController(recursos);
+        tabs.add("Recursos",recursos);
 
 add(tabs);
 

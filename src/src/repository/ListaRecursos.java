@@ -1,6 +1,7 @@
 package repository;
 
 import model.CategoriaRecurso;
+import model.Funcionario;
 import model.Recurso;
 
 import java.util.ArrayList;
@@ -53,6 +54,24 @@ public class ListaRecursos {
             }
         }
 
+        return resultado;
+    }
+
+    public List<Recurso> listarTodos() {
+        return new ArrayList<>(listaRecu);
+    }
+
+    public List<Recurso> buscar(CategoriaRecurso categoria, String descripcion) {
+        List<Recurso> resultado = new ArrayList<>();
+        for (Recurso r : listaRecu) {
+            boolean coincideCategoria = categoria == null
+                    || Objects.equals(r.getCategoria().getId(), categoria.getId());
+            boolean coincideDescripcion = descripcion == null || descripcion.isBlank()
+                    || r.getDescripcion().toLowerCase().contains(descripcion.toLowerCase());
+            if (coincideCategoria && coincideDescripcion) {
+                resultado.add(r);
+            }
+        }
         return resultado;
     }
 }
