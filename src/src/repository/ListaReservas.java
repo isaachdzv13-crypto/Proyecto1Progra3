@@ -1,5 +1,6 @@
 package repository;
 
+import model.Recurso;
 import model.Reserva;
 
 import java.util.ArrayList;
@@ -49,7 +50,9 @@ public class ListaReservas {
         r.setEstado(Reserva.Estado.CANCELADA);
         return null;
     }
-
+    public List<Reserva> listarTodas() {
+        return new ArrayList<>(listaReservas);
+    }
 
 
 }

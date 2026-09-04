@@ -47,16 +47,21 @@ public FuncionariosPanel(){
     txtBuscarNombre.setPreferredSize(new Dimension(160, 26));
 
 
-    JPanel formulario = new JPanel(new GridLayout(1, 6, 6, 6));
+    JPanel formulario = new JPanel(new FlowLayout(FlowLayout.LEFT));
     formulario.setBorder(BorderFactory.createTitledBorder("Funcionario"));
+
     formulario.add(new JLabel("ID:"));
     formulario.add(txtId);
+    txtId.setPreferredSize(new Dimension(100, 26));
+
     formulario.add(new JLabel("Nombre:"));
     formulario.add(txtNombre);
+    txtNombre.setPreferredSize(new Dimension(160, 26));
     formulario.add(new JLabel("Telefono:"));
     formulario.add(txtTelefono);
+    txtTelefono.setPreferredSize(new Dimension(160, 26));
 
-    JPanel botones = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    JPanel botones = new JPanel(new FlowLayout(FlowLayout.CENTER));
     botones.add(btnGuardar);
     botones.add(btnBorrar);
     botones.add(btnLimpiar);

@@ -42,7 +42,7 @@ public class Reserva {
         this.descripcion = descripcion;
     }
 
-    public String getactividad() {
+    public String getActividad() {
         return actividad;
     }
 

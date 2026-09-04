@@ -10,7 +10,11 @@ public class CategoriaRecurso {
         this.desc=desc;
 
     }
-
+    public CategoriaRecurso(String id, String desc) {
+        this.id = id;
+        this.desc = desc;
+//        actualizarContador(id);
+    }
 
     public String getId() {
         return id;
