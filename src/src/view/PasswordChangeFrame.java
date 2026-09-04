@@ -3,6 +3,7 @@ package view;
 import Theme.Themes;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class PasswordChangeFrame extends JFrame {
     public JTextField txtClave;
@@ -25,6 +26,10 @@ public class PasswordChangeFrame extends JFrame {
         setSize(400, 250);
         setLocationRelativeTo(null);
         setResizable(false);
+        ImageIcon image= new ImageIcon("logo.png");
+        Image imagen= image.getImage();
+        Image imagenRedimensionada= imagen.getScaledInstance(32,32,Image.SCALE_SMOOTH);
+        this.setIconImage(imagenRedimensionada);
 
         JPanel panel=new JPanel();
         panel.setLayout(null);

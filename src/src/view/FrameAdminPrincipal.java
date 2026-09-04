@@ -6,12 +6,18 @@ import controllers.RecursosController;
 import model.Administrador;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class FrameAdminPrincipal extends JFrame {
     private final Administrador admin;
 
     public FrameAdminPrincipal(Administrador admin) {
         this.admin = admin;
+        ImageIcon image= new ImageIcon("logo.png");
+        Image imagen= image.getImage();
+        Image imagenRedimensionada= imagen.getScaledInstance(32,32,Image.SCALE_SMOOTH);
+        this.setIconImage(imagenRedimensionada);
+
 
         setTitle("Sistema de Reservas - " + admin.getId() + " (ADMIN)");
         setDefaultCloseOperation(EXIT_ON_CLOSE);

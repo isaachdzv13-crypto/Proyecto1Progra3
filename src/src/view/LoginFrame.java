@@ -39,6 +39,7 @@ private JPasswordField password;
     setLocationRelativeTo(null);
     setResizable(false);
 
+
     JPanel login = new JPanel();
     login.setLayout(null);
 
@@ -97,6 +98,11 @@ login.add(demo);
         login.add(cambiarClave);
 login.add(chkMostrar);
     add(login);
+
+        ImageIcon image= new ImageIcon("logo.png");
+        Image imagen= image.getImage();
+        Image imagenRedimensionada= imagen.getScaledInstance(32,32,Image.SCALE_SMOOTH);
+        this.setIconImage(imagenRedimensionada);
 }
 
 

@@ -35,6 +35,7 @@ public FuncionariosPanel(){
     setLayout(new BorderLayout(8, 8));
     setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
+
     JPanel busqueda = new JPanel(new FlowLayout(FlowLayout.LEFT));
     busqueda.setBorder(BorderFactory.createTitledBorder("Busqueda"));
     busqueda.add(new JLabel("ID:"));
