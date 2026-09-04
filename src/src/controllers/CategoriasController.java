@@ -48,6 +48,7 @@ public class CategoriasController {
             CategoriaRecurso existente = categorias.buscarPorId(id);
             if (existente != null) {
                 existente.setDesc(desc);
+                guardarXML();
                 JOptionPane.showMessageDialog(vista, "Categoria actualizada.");
                 limpiar();
                 cargarTabla(categorias.listarTodas());
@@ -57,10 +58,19 @@ public class CategoriasController {
 
         CategoriaRecurso nueva = new CategoriaRecurso(desc);
         categorias.addCategoria(nueva);
+        guardarXML();
         JOptionPane.showMessageDialog(vista, "Categoria agregada con ID " + nueva.getId());
 
         limpiar();
         cargarTabla(categorias.listarTodas());
+    }
+
+    private void guardarXML() {
+        try {
+            DatosQuemados.getInstancia().guardar();
+        } catch (IllegalStateException ex) {
+            JOptionPane.showMessageDialog(vista, ex.getMessage());
+        }
     }
 
     private void borrar() {
@@ -85,6 +95,7 @@ public class CategoriasController {
         if (confirmacion != JOptionPane.YES_OPTION) return;
 
         categorias.borrarCategoria(categoria.getDesc());
+        guardarXML();
         limpiar();
         cargarTabla(categorias.listarTodas());
     }

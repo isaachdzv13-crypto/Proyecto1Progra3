@@ -1,5 +1,6 @@
 package controllers;
 
+import contexto.DatosQuemados;
 import model.Administrador;
 import model.Funcionario;
 import model.Usuario;
@@ -54,7 +55,7 @@ public class LoginController {
 
             // Abrir ventana del administrador
              new FrameAdminPrincipal((Administrador) usuario).setVisible(true);
-
+            vista.dispose();
 
 
 
@@ -68,26 +69,7 @@ public class LoginController {
     }
 //aa
     private Usuario validarCredenciales(String id, String clave) {
-
-        Administrador admin =
-                new Administrador("admin", "1234");
-
-        Funcionario funcionario =
-                new Funcionario( "1234", "Juan", "8888-8888");
-
-        if (id.equals(admin.getId()) &&
-                clave.equals(admin.getClave())) {
-
-            return admin;
-        }
-
-        if (id.equals(funcionario.getId()) &&
-                clave.equals(funcionario.getClave())) {
-
-            return funcionario;
-        }
-
-        return null;
+        return DatosQuemados.getInstancia().login(id, clave);
     }
     private void abrirCambiarClave() {
         PasswordChangeFrame ventana = new PasswordChangeFrame();

@@ -63,11 +63,13 @@ public class FuncionariosController {
         if (existente != null) {
             existente.setNombre(nombre);
             existente.setTelefono(telefono);
+            guardarXML();
             JOptionPane.showMessageDialog(vista, "Funcionario actualizado.");
         } else {
             try {
                 Funcionario nuevo = new Funcionario(id, nombre, telefono);
                 funcionarios.addRecurso(nuevo);
+                guardarXML();
                 JOptionPane.showMessageDialog(vista,
                         "Funcionario agregado. Su clave inicial es igual al ID.");
             } catch (IllegalArgumentException ex) {
@@ -93,11 +95,14 @@ public class FuncionariosController {
         if (confirmacion != JOptionPane.YES_OPTION) return;
 
         funcionarios.borrarRecurso(id);
+        guardarXML();
         limpiar();
         cargarTabla(funcionarios.listarTodos());
     }
 
     private void limpiar() {
+
+
         vista.txtId.setText("");
         vista.txtNombre.setText("");
         vista.txtTelefono.setText("");
@@ -119,5 +124,11 @@ public class FuncionariosController {
             vista.modeloTabla.addRow(new Object[]{f.getId(), f.getNombre(), f.getTelefono()});
         }
     }
-
+    private void guardarXML() {
+        try {
+            DatosQuemados.getInstancia().guardar();
+        } catch (IllegalStateException ex) {
+            JOptionPane.showMessageDialog(vista, ex.getMessage());
+        }
+    }
 }

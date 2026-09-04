@@ -74,9 +74,11 @@ public class RecursosController {
         if (existente != null) {
             existente.setCategoria(categoria);
             existente.setDescripcion(desc);
+            guardarXML();
             JOptionPane.showMessageDialog(vista, "Recurso actualizado.");
         } else {
             recursos.addRecurso(new Recurso(id, categoria, desc));
+            guardarXML();
             JOptionPane.showMessageDialog(vista, "Recurso agregado.");
         }
 
@@ -97,6 +99,7 @@ public class RecursosController {
         if (confirmacion != JOptionPane.YES_OPTION) return;
 
         recursos.borrarRecurso(id);
+        guardarXML();
         limpiar();
         cargarTabla(recursos.listarTodos());
     }
@@ -127,5 +130,11 @@ public class RecursosController {
             vista.modeloTabla.addRow(new Object[]{r.getId(), r.getCategoria().getDesc(), r.getDescripcion()});
         }
     }
-
+    private void guardarXML() {
+        try {
+            DatosQuemados.getInstancia().guardar();
+        } catch (IllegalStateException ex) {
+            JOptionPane.showMessageDialog(vista, ex.getMessage());
+        }
+    }
 }
