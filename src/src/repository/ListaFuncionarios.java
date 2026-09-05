@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class ListaFuncionarios {
-    private List<Funcionario> listaFuncionarios;
+    private final List<Funcionario> listaFuncionarios;
 
     public ListaFuncionarios(){
         listaFuncionarios= new ArrayList<>();
@@ -16,16 +16,14 @@ public class ListaFuncionarios {
         listaFuncionarios.add(func);
     }
 
-    public boolean borrarRecurso(String id) {
+    public void borrarRecurso(String id) {
 
         Funcionario funcionario = buscarPorId(id);
 
         if (funcionario != null) {
             listaFuncionarios.remove(funcionario);
-            return true;
         }
 
-        return false;
     }
     public Funcionario buscarPorId(String id) {
 

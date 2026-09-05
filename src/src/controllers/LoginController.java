@@ -10,6 +10,7 @@ import view.LoginFrame;
 import view.PasswordChangeFrame;
 
 import javax.swing.*;
+import java.util.Objects;
 
 public class LoginController {
     private final LoginFrame vista;
@@ -24,6 +25,7 @@ public class LoginController {
             iniciarSesion(id, clave);
         });
         view.cambiarClave.addActionListener(e->abrirCambiarClave());
+
 
 
     }
@@ -74,6 +76,41 @@ public class LoginController {
     }
     private void abrirCambiarClave() {
         PasswordChangeFrame ventana = new PasswordChangeFrame();
+
+        ventana.aceptar.addActionListener(e -> cambiarContrasenia(ventana));
+        ventana.cancelar.addActionListener(e -> ventana.dispose());
+
         ventana.setVisible(true);
     }
+    private void cambiarContrasenia( PasswordChangeFrame v){
+      String claveVieja= v.txtClave.getText();
+        String claveNueva= v.txtClaveNueva.getText();
+        String claveNueva2= v.txtClaveNueva2.getText();
+        if ( claveVieja.isBlank()
+                || claveNueva.isBlank() || claveNueva2.isBlank()) {
+            mostrarError("Los campos no pueden estar vacíos.");
+            return;
+        }
+
+        if (!claveNueva.equals(claveNueva2)) {
+            mostrarError("Las contraseñas no coinciden.");
+            return;
+        }
+        Funcionario aux= DatosQuemados.getInstancia().getFuncionarios().buscarPorContrasenia(claveVieja);
+        if(aux==null){
+            mostrarError("No se encontro un usuario con esa contraseña...");
+            return;
+        }
+        aux.setClave(claveNueva);
+        DatosQuemados.getInstancia().guardar();
+JOptionPane.showMessageDialog(v,"Cambio exitoso");
+
+        v.dispose();
+
+    }
+
+    private void mostrarError(String mensaje) {
+        JOptionPane.showMessageDialog(vista, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
 }

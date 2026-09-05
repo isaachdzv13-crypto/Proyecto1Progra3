@@ -10,7 +10,7 @@ public class PasswordChangeFrame extends JFrame {
     public JTextField txtClaveNueva;
     public JTextField txtClaveNueva2;
 
-//FALTA EL BOTON DE ACEPTAR, QUE REALICE LA ACCION
+
 
     public JButton aceptar= Themes.button("Aceptar",Themes.PRIMARY);
     public JButton cancelar= Themes.button("Cancelar",Themes.PRIMARY);
@@ -62,8 +62,11 @@ public class PasswordChangeFrame extends JFrame {
         add(panel);
 
     }
+public String getContraNueva(){
+        return this.txtClaveNueva.getText().trim();
+}
+    public String getContraNueva2() {
+        return this.txtClaveNueva2.getText().trim();
 
-
-
-
+    }
 }
