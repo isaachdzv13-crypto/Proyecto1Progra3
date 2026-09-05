@@ -2,6 +2,7 @@ package model;
 
 
 
+import javax.swing.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -131,6 +132,20 @@ public class Reserva {
         this.horaFin=hFinal;
         this.fecha=fecha;
         
+    }
+    public void ingresarRecursoAReserva(Recurso r){
+
+        if(listaRecursos.contains(r)) {
+            this.listaRecursos.add(r);
+        }
+        else JOptionPane.showMessageDialog(null,"No se encontro el recurso.");
+    }
+
+    public void liberarRecursos(){
+        for(Recurso r: this.listaRecursos){
+            listaRecursos.remove(r);
+
+        }
     }
 
 }

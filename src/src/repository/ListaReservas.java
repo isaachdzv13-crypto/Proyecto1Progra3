@@ -45,10 +45,16 @@ public class ListaReservas {
     public String cancelar(String idReserva){
         Reserva r = buscarPorId(idReserva);
         if (r == null) return "No existe esa reserva";
+
         if (r.getEstado() == Reserva.Estado.CANCELADA) return "Esa reserva ya estaba cancelada";
         if (!r.getFecha().isAfter(java.time.LocalDate.now())) return "Solo se pueden cancelar reservas futuras";
-        r.setEstado(Reserva.Estado.CANCELADA);
-        return null;
+        else{
+            r.setEstado(Reserva.Estado.CANCELADA);
+            r.liberarRecursos();
+            return "Reserva Eliminada";
+
+        }
+
     }
     public List<Reserva> listarTodas() {
         return new ArrayList<>(listaReservas);
