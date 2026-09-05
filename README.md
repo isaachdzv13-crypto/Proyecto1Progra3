@@ -14,3 +14,4 @@ Proyecto3 Isaac Hernandez Vargas Dylan Araya
 # en agregar categorias falta una funcion que aumente el contador del id, creo que es por el segundo constructor para el xml YA
 # en recursos el cmbbox solo se actualiza si se cierra el programa. YA
 # si se borra un recurso, no se puede borrar la categoria, revisar el metodo YA
+# agregar un boton que cierre sesion, osea que envie de nuevo al panel de login
