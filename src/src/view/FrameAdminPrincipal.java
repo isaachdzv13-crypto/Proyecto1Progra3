@@ -34,8 +34,19 @@ public class FrameAdminPrincipal extends JFrame {
         tabs.addTab("Categorias",categorias);
 
         RecursosPanel recursos= new RecursosPanel();
-        new RecursosController(recursos);
+        RecursosController control=new RecursosController(recursos);
         tabs.add("Recursos",recursos);
+
+
+
+
+
+
+        tabs.addChangeListener(e -> {
+            if (tabs.getSelectedComponent() == recursos) {
+                control.cargarCombos();
+            }
+        });
 
 add(tabs);
 

@@ -35,7 +35,7 @@ public class RecursosController {
         cargarTabla(recursos.listarTodos());
     }
 
-    private void cargarCombos() {
+    public void cargarCombos() {
         vista.cmbFiltroCategoria.removeAllItems();
         vista.cmbFiltroCategoria.addItem(null); // representa "todas las categorias"
         vista.cmbCategoria.removeAllItems();
@@ -84,6 +84,7 @@ public class RecursosController {
 
         limpiar();
         cargarTabla(recursos.listarTodos());
+//        cargarCombos();
     }
 
     private void borrar() {
@@ -102,6 +103,7 @@ public class RecursosController {
         guardarXML();
         limpiar();
         cargarTabla(recursos.listarTodos());
+//        cargarCombos();
     }
 
     private void limpiar() {
