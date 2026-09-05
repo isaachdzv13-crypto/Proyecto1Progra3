@@ -1,11 +1,11 @@
 # Proyecto1Progra3
 Proyecto3 Isaac Hernandez Vargas Dylan Araya
-# Falta logica de reservas!!!
-# Boton de Imprimir pdfs
+# Falta logica de reservas!!! YA
+# Boton de Imprimir pdfs FALTA IMPLEMENTACION
 # Panel calendarizacion
 # Panel actividades
 # Panel estadisticas
-# Crear Frame de funcionarios
+# Crear Frame de funcionarios YA
 # Incluir el llm
 # Configurar mejor la GUI - colores
 # revisar el cambio de contrasenias
