@@ -13,7 +13,15 @@ public class CategoriaRecurso {
     public CategoriaRecurso(String id, String desc) {
         this.id = id;
         this.desc = desc;
-//        actualizarContador(id);
+        actualizarContador(id);
+    }
+
+    private static void actualizarContador(String id) {
+        int numero = Integer.parseInt(id.replace("CAT-", ""));
+
+        if (numero >= contador) {
+            contador = numero + 1;
+        }
     }
 
     public String getId() {

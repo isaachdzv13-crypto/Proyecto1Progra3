@@ -5,6 +5,7 @@ import model.Administrador;
 import model.Funcionario;
 import model.Usuario;
 import view.FrameAdminPrincipal;
+import view.FrameFuncionarioPrincipal;
 import view.LoginFrame;
 import view.PasswordChangeFrame;
 
@@ -62,9 +63,9 @@ public class LoginController {
         } else {
 
             JOptionPane.showMessageDialog(vista,"\"Bienvenido funcionario.\"");
+            new FrameFuncionarioPrincipal((Funcionario) usuario).setVisible(true);
+            vista.dispose();
 
-            // Abrir ventana del funcionario
-            // new FuncionarioFrame((Funcionario) usuario).setVisible(true);
         }
     }
 //aa

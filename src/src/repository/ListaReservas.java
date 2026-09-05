@@ -3,6 +3,7 @@ package repository;
 import model.Recurso;
 import model.Reserva;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -17,17 +18,7 @@ public class ListaReservas {
         listaReservas.add(r);
     }
 
-    public ListaReservas reservasPorId(String id){
-        ListaReservas rs = new ListaReservas();
-        for(Reserva s: this.listaReservas){
-            if(Objects.equals(s.getIdFuncionario(), id)){
-                rs.add(s);
-            }
-        }
 
-        return rs;
-
-}
     public List<Reserva> listarPorFuncionario(String idFuncionario){
         List<Reserva> res = new ArrayList<>();
         for (Reserva r : listaReservas){
@@ -42,19 +33,23 @@ public class ListaReservas {
         }
         return null;
     }
-    public String cancelar(String idReserva){
-        Reserva r = buscarPorId(idReserva);
-        if (r == null) return "No existe esa reserva";
+    public String cancelar(String idReserva) {
+        Reserva reserva = buscarPorId(idReserva);
 
-        if (r.getEstado() == Reserva.Estado.CANCELADA) return "Esa reserva ya estaba cancelada";
-        if (!r.getFecha().isAfter(java.time.LocalDate.now())) return "Solo se pueden cancelar reservas futuras";
-        else{
-            r.setEstado(Reserva.Estado.CANCELADA);
-            r.liberarRecursos();
-            return "Reserva Eliminada";
-
+        if (reserva == null) {
+            return "No existe esa reserva";
         }
 
+        if (reserva.getEstado() == Reserva.Estado.CANCELADA) {
+            return "Esa reserva ya estaba cancelada";
+        }
+
+        if (!reserva.getFecha().isAfter(LocalDate.now())) {
+            return "Solo se pueden cancelar reservas futuras";
+        }
+
+        reserva.setEstado(Reserva.Estado.CANCELADA);
+        return null;
     }
     public List<Reserva> listarTodas() {
         return new ArrayList<>(listaReservas);
