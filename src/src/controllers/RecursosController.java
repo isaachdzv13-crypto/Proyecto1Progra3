@@ -39,6 +39,7 @@ public class RecursosController {
         vista.cmbFiltroCategoria.removeAllItems();
         vista.cmbFiltroCategoria.addItem(null); // representa "todas las categorias"
         vista.cmbCategoria.removeAllItems();
+        vista.cmbCategoria.addItem(null);
 
         for (CategoriaRecurso c : categorias.listarTodas()) {
             vista.cmbFiltroCategoria.addItem(c);
@@ -58,7 +59,7 @@ public class RecursosController {
         String desc = vista.txtDescripcion.getText().trim();
 
         if (id.isBlank()) {
-            JOptionPane.showMessageDialog(vista, "El ID o numero de activo es obligatorio.");
+            JOptionPane.showMessageDialog(vista, "El ID  es obligatorio.");
             return;
         }
         if (categoria == null) {
