@@ -1,5 +1,6 @@
 package view;
 
+import controllers.CalendarizacionController;
 import controllers.ReservasController;
 import model.Funcionario;
 
@@ -26,6 +27,11 @@ public class FrameFuncionarioPrincipal extends JFrame {
         ReservasPanel reservas= new ReservasPanel();
         new ReservasController(reservas,funcionario);
         tabs.add("Reservas",reservas);
+
+        CalendarizacionPanel calendar= new CalendarizacionPanel();
+        new CalendarizacionController(calendar);
+        tabs.add("Calendarizacion",calendar);
+
 
         add(tabs);
 

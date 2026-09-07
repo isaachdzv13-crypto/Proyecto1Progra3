@@ -1,5 +1,6 @@
 package view;
 
+import controllers.CalendarizacionController;
 import controllers.CategoriasController;
 import controllers.FuncionariosController;
 import controllers.RecursosController;
@@ -36,6 +37,11 @@ public class FrameAdminPrincipal extends JFrame {
         RecursosPanel recursos= new RecursosPanel();
         RecursosController control=new RecursosController(recursos);
         tabs.add("Recursos",recursos);
+
+        CalendarizacionPanel calendario= new CalendarizacionPanel();
+        CalendarizacionController controle= new CalendarizacionController(calendario);
+        tabs.add("Calendarizacion",calendario);
+
 
 
 
