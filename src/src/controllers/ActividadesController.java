@@ -12,8 +12,8 @@ import java.time.LocalTime;
 
 public class ActividadesController {
 
-    private ActividadesPanel vista;
-    private DatosQuemados datos = DatosQuemados.getInstancia();
+    private final ActividadesPanel vista;
+    private final DatosQuemados datos = DatosQuemados.getInstancia();
 
     public ActividadesController(ActividadesPanel vista) {
         this.vista = vista;

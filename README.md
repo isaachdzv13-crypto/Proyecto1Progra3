@@ -1,5 +1,5 @@
 # Proyecto1Progra3
-Proyecto3 Isaac Hernandez Vargas Dylan Araya
+Proyecto3 Isaac Hernandez Vargas(Grupo 1) Dylan Araya(Grupo 2)
 # Falta logica de reservas!!! YA
 # Boton de Imprimir pdfs FALTA IMPLEMENTACION
 # Panel calendarizacion YA
