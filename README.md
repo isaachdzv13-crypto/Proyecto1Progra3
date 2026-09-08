@@ -2,7 +2,7 @@
 Proyecto3 Isaac Hernandez Vargas Dylan Araya
 # Falta logica de reservas!!! YA
 # Boton de Imprimir pdfs FALTA IMPLEMENTACION
-# Panel calendarizacion
+# Panel calendarizacion YA
 # Panel actividades
 # Panel estadisticas
 # Crear Frame de funcionarios YA
@@ -15,3 +15,4 @@ Proyecto3 Isaac Hernandez Vargas Dylan Araya
 # en recursos el cmbbox solo se actualiza si se cierra el programa. YA
 # si se borra un recurso, no se puede borrar la categoria, revisar el metodo YA
 # agregar un boton que cierre sesion, osea que envie de nuevo al panel de login
+# hacer las junit testing 
