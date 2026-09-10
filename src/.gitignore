@@ -1,0 +1,13 @@
+# Maven
+target/
+
+# Datos generados en tiempo de ejecucion (se regeneran solos al abrir la app)
+data/
+
+# IntelliJ
+.idea/workspace.xml
+.idea/shelf/
+*.iml.bak
+
+# Sistema operativo
+.DS_Store

@@ -34,8 +34,8 @@ public class ReservasController {
         vista.btnReservar.addActionListener(e -> reservar());
         vista.btnCancelarReserva.addActionListener(e -> cancelarReserva());
         vista.btnLimpiar.addActionListener(e -> limpiar());
-        vista.btnImprimir.addActionListener(e -> JOptionPane.showMessageDialog(
-                vista, "Generacion de reporte en PDF pendiente de implementar."));
+        vista.btnImprimir.addActionListener(e ->
+                util.Impresora.imprimirTabla(vista, vista.tabla, "el listado de reservas"));
 
         cargarCategorias();
         limpiar();

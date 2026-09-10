@@ -21,7 +21,7 @@ public class CategoriasController {
         vista.btnBorrar.addActionListener(e -> borrar());
         vista.btnLimpiar.addActionListener(e -> limpiar());
         vista.btnImprimir.addActionListener(e ->
-                JOptionPane.showMessageDialog(vista, "Generacion de reporte en PDF pendiente de implementar."));
+                util.Impresora.imprimirTabla(vista, vista.tabla, "el listado de categorias"));
 
         vista.tabla.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) cargarSeleccion();

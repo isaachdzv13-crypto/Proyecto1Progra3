@@ -26,7 +26,7 @@ public class RecursosController {
         vista.btnBorrar.addActionListener(e -> borrar());
         vista.btnLimpiar.addActionListener(e -> limpiar());
         vista.btnImprimir.addActionListener(e ->
-                JOptionPane.showMessageDialog(vista, "Generacion de reporte en PDF pendiente de implementar."));
+                util.Impresora.imprimirTabla(vista, vista.tabla, "el listado de recursos"));
 
         vista.tabla.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) cargarSeleccion();
