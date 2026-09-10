@@ -55,5 +55,23 @@ public class ListaReservas {
         return new ArrayList<>(listaReservas);
     }
 
+    public boolean tieneReservaActivaConRecurso(Recurso recurso) {
+        for (Reserva r : listaReservas) {
+            if (r.getEstado() == Reserva.Estado.ACTIVA && r.getRecursos().contains(recurso)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean tieneReservaActivaDeFuncionario(String idFuncionario) {
+        for (Reserva r : listaReservas) {
+            if (r.getEstado() == Reserva.Estado.ACTIVA
+                    && Objects.equals(r.getIdFuncionario(), idFuncionario)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

@@ -49,6 +49,9 @@ public class FrameFuncionarioPrincipal extends JFrame {
         new ActividadesController(actividades);
         tabs.add("Actividades",actividades);
 
+        AsistenteIAPanel asistenteIA = new AsistenteIAPanel();
+        new controllers.AsistenteIAController(asistenteIA, reservas, tabs, 0);
+        tabs.add("Asistente IA", asistenteIA);
 
         add(tabs, BorderLayout.CENTER);
 

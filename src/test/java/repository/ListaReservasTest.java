@@ -41,4 +41,44 @@ public class ListaReservasTest {
 
         assertNull(encontrada);
     }
+
+    @Test
+    void detectaReservaActivaConUnRecurso() {
+        ListaReservas lista = new ListaReservas();
+        model.CategoriaRecurso categoria = new model.CategoriaRecurso("Sala");
+        model.Recurso recurso = new model.Recurso("REC-900", categoria, "Proyector");
+
+        Reserva reserva = new Reserva("1234", "RES-900", "Reunion", "Reunion",
+                LocalTime.of(9, 0), LocalTime.of(10, 0), LocalDate.now().plusDays(1));
+        reserva.setRecursos(java.util.List.of(recurso));
+        lista.add(reserva);
+
+        assertTrue(lista.tieneReservaActivaConRecurso(recurso));
+    }
+
+    @Test
+    void noDetectaReservaConRecursoDeUnaReservaCancelada() {
+        ListaReservas lista = new ListaReservas();
+        model.CategoriaRecurso categoria = new model.CategoriaRecurso("Sala");
+        model.Recurso recurso = new model.Recurso("REC-901", categoria, "Proyector");
+
+        Reserva reserva = new Reserva("1234", "RES-901", "Reunion", "Reunion",
+                LocalTime.of(9, 0), LocalTime.of(10, 0), LocalDate.now().plusDays(1));
+        reserva.setRecursos(java.util.List.of(recurso));
+        reserva.setEstado(Reserva.Estado.CANCELADA);
+        lista.add(reserva);
+
+        assertFalse(lista.tieneReservaActivaConRecurso(recurso));
+    }
+
+    @Test
+    void detectaReservaActivaDeUnFuncionario() {
+        ListaReservas lista = new ListaReservas();
+        Reserva reserva = new Reserva("5678", "RES-902", "Reunion", "Reunion",
+                LocalTime.of(9, 0), LocalTime.of(10, 0), LocalDate.now().plusDays(1));
+        lista.add(reserva);
+
+        assertTrue(lista.tieneReservaActivaDeFuncionario("5678"));
+        assertFalse(lista.tieneReservaActivaDeFuncionario("0000"));
+    }
 }

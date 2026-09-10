@@ -90,6 +90,12 @@ public class FuncionariosController {
         }
         String id = (String) vista.modeloTabla.getValueAt(fila, 0);
 
+        if (DatosQuemados.getInstancia().getReservas().tieneReservaActivaDeFuncionario(id)) {
+            JOptionPane.showMessageDialog(vista,
+                    "No se puede borrar: el funcionario tiene reservas activas.");
+            return;
+        }
+
         int confirmacion = JOptionPane.showConfirmDialog(vista,
                 "¿Desea borrar al funcionario " + id + "?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (confirmacion != JOptionPane.YES_OPTION) return;
