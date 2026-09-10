@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class ActividadesPanel extends JPanel {
     public JTextField txtFecha= Themes.textField();
-   public  JButton btnCargar= Themes.button("Cargas",Themes.SUCCESS);
+   public  JButton btnCargar= Themes.button("Cargar",Themes.SUCCESS);
    public  JButton btnImprimir= Themes.button("Imprimir",Themes.PRIMARY);
     public final DefaultTableModel modeloTabla = new DefaultTableModel() {
         @Override

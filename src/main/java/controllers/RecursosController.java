@@ -26,7 +26,7 @@ public class RecursosController {
         vista.btnBorrar.addActionListener(e -> borrar());
         vista.btnLimpiar.addActionListener(e -> limpiar());
         vista.btnImprimir.addActionListener(e ->
-                JOptionPane.showMessageDialog(vista, "Generacion de reporte en PDF pendiente de implementar."));
+                util.Impresora.imprimirTabla(vista, vista.tabla, "el listado de recursos"));
 
         vista.tabla.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) cargarSeleccion();
@@ -95,6 +95,13 @@ public class RecursosController {
             return;
         }
         String id = (String) vista.modeloTabla.getValueAt(fila, 0);
+        Recurso recurso = recursos.buscarPorId(id);
+
+        if (recurso != null && DatosQuemados.getInstancia().getReservas().tieneReservaActivaConRecurso(recurso)) {
+            JOptionPane.showMessageDialog(vista,
+                    "No se puede borrar: el recurso tiene reservas activas.");
+            return;
+        }
 
         int confirmacion = JOptionPane.showConfirmDialog(vista,
                 "¿Desea borrar el recurso " + id + "?", "Confirmar", JOptionPane.YES_NO_OPTION);

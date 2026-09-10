@@ -21,8 +21,8 @@ public class CalendarizacionController {
         this.vista = vista;
 
         vista.btnCargar.addActionListener(e -> cargarCalendarizacion());
-        vista.btnImprimir.addActionListener(e -> JOptionPane.showMessageDialog(
-                vista, "Generacion de reporte en PDF pendiente de implementar."));
+        vista.btnImprimir.addActionListener(e ->
+                util.Impresora.imprimirTabla(vista, vista.tabla, "la calendarizacion"));
 
         vista.txtFecha.setText(LocalDate.now().toString());
         cargarCategorias();

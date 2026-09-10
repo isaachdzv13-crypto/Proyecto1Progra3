@@ -1,5 +1,6 @@
 package view;
 
+import Theme.Themes;
 import controllers.*;
 import model.Administrador;
 
@@ -8,6 +9,7 @@ import java.awt.*;
 
 public class FrameAdminPrincipal extends JFrame {
     private final Administrador admin;
+    public final JButton btnCerrarSesion = Themes.button("Cerrar sesión", Themes.DANGER);
 
     public FrameAdminPrincipal(Administrador admin) {
         this.admin = admin;
@@ -21,6 +23,16 @@ public class FrameAdminPrincipal extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(950, 620);
         setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
+
+        JPanel barraSuperior = new JPanel(new BorderLayout());
+        barraSuperior.setBorder(BorderFactory.createEmptyBorder(8, 12, 8, 12));
+        JLabel lblUsuario = new JLabel("Sesión: " + admin.getId() + " (Administrador)");
+        lblUsuario.setForeground(Theme.Themes.TEXT);
+        barraSuperior.add(lblUsuario, BorderLayout.WEST);
+        barraSuperior.add(btnCerrarSesion, BorderLayout.EAST);
+        add(barraSuperior, BorderLayout.NORTH);
+
         JTabbedPane tabs = new JTabbedPane();
 
         FuncionariosPanel funcionariosPanel = new FuncionariosPanel();
@@ -43,16 +55,33 @@ public class FrameAdminPrincipal extends JFrame {
         new ActividadesController(actividades);
         tabs.add("Actividades",actividades);
 
-
+        EstadisticasPanel estadisticas = new EstadisticasPanel();
+        EstadisticasController controladorEstadisticas = new EstadisticasController(estadisticas);
+        tabs.add("Estadisticas", estadisticas);
 
 
         tabs.addChangeListener(e -> {
             if (tabs.getSelectedComponent() == recursos) {
                 control.cargarCombos();
             }
+            if (tabs.getSelectedComponent() == estadisticas) {
+                controladorEstadisticas.actualizar();
+            }
         });
 
-add(tabs);
+add(tabs, BorderLayout.CENTER);
 
+        btnCerrarSesion.addActionListener(e -> cerrarSesion());
+    }
+
+    private void cerrarSesion() {
+        int confirmacion = JOptionPane.showConfirmDialog(this,
+                "¿Desea cerrar sesión?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        if (confirmacion != JOptionPane.YES_OPTION) return;
+
+        LoginFrame ventana = new LoginFrame();
+        new controllers.LoginController(ventana, null);
+        ventana.setVisible(true);
+        dispose();
     }
 }

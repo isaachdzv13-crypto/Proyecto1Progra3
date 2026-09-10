@@ -1,0 +1,16 @@
+# Maven
+target/
+
+# Datos generados en tiempo de ejecucion (se regeneran solos al abrir la app)
+data/
+
+# Llave de la API de IA (nunca se debe subir a GitHub)
+apikey.txt
+
+# IntelliJ
+.idea/workspace.xml
+.idea/shelf/
+*.iml.bak
+
+# Sistema operativo
+.DS_Store

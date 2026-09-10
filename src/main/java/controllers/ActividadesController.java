@@ -19,8 +19,8 @@ public class ActividadesController {
         this.vista = vista;
 
         vista.btnCargar.addActionListener(e -> cargar());
-        vista.btnImprimir.addActionListener(e -> JOptionPane.showMessageDialog(
-                vista, "Reporte PDF pendiente."));
+        vista.btnImprimir.addActionListener(e ->
+                util.Impresora.imprimirTabla(vista, vista.tabla, "el listado de actividades"));
 
         vista.txtFecha.setText(LocalDate.now().toString());
         cargar();
