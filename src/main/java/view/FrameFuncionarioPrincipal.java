@@ -2,6 +2,7 @@ package view;
 
 import controllers.ActividadesController;
 import controllers.CalendarizacionController;
+import controllers.EstadisticasController;
 import controllers.ReservasController;
 import model.Funcionario;
 
@@ -37,6 +38,9 @@ public class FrameFuncionarioPrincipal extends JFrame {
         new ActividadesController(actividades);
         tabs.add("Actividades",actividades);
 
+        EstadisticasPanel estadisticasPanel= new EstadisticasPanel();
+        new EstadisticasController(estadisticasPanel);
+        tabs.add("Estadisticas",estadisticasPanel);
 
         add(tabs);
 
