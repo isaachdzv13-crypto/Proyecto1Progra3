@@ -43,7 +43,9 @@ public class FrameAdminPrincipal extends JFrame {
         new ActividadesController(actividades);
         tabs.add("Actividades",actividades);
 
-
+EstadisticasPanel estadisticasPanel= new EstadisticasPanel();
+new EstadisticasController(estadisticasPanel);
+tabs.add("Estadisticas",estadisticasPanel);
 
 
         tabs.addChangeListener(e -> {
