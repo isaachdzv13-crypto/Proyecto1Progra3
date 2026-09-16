@@ -12,6 +12,7 @@ import view.EstadisticasPanel;
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
+import java.time.temporal.WeekFields;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -25,21 +26,25 @@ public class EstadisticasController {
         this.vista = vista;
 
         vista.getBtnCargar().addActionListener(
-                e -> cargar()
+                e -> cargarRecursos()
+        );
+
+        vista.getBtnCargar2().addActionListener(
+                e -> cargarActividades()
         );
     }
 
-    private void cargar() {
+    private void cargarRecursos() {
         LocalDate desde;
         LocalDate hasta;
 
         try {
             desde = LocalDate.parse(
-                    vista.getTxtDesde().getText()
+                    vista.getTxtDesde().getText().trim()
             );
 
             hasta = LocalDate.parse(
-                    vista.getTxtHasta().getText()
+                    vista.getTxtHasta().getText().trim()
             );
         } catch (Exception e) {
             JOptionPane.showMessageDialog(
@@ -73,9 +78,11 @@ public class EstadisticasController {
                 continue;
             }
 
-            for (Recurso recurso :
-                    reserva.getRecursos()) {
+            if (reserva.getRecursos() == null) {
+                continue;
+            }
 
+            for (Recurso recurso : reserva.getRecursos()) {
                 String categoria =
                         recurso.getCategoria().getDesc();
 
@@ -85,10 +92,7 @@ public class EstadisticasController {
                     cantidad = cantidades.get(categoria);
                 }
 
-                cantidades.put(
-                        categoria,
-                        cantidad + 1
-                );
+                cantidades.put(categoria, cantidad + 1);
             }
         }
 
@@ -119,8 +123,7 @@ public class EstadisticasController {
                         datosGrafico
                 );
 
-        ChartPanel chartPanel =
-                new ChartPanel(grafico);
+        ChartPanel chartPanel = new ChartPanel(grafico);
 
         vista.getPanelGrafico().removeAll();
 
@@ -131,5 +134,103 @@ public class EstadisticasController {
 
         vista.getPanelGrafico().revalidate();
         vista.getPanelGrafico().repaint();
+    }
+
+    private void cargarActividades() {
+        LocalDate desde;
+        LocalDate hasta;
+
+        try {
+            desde = LocalDate.parse(
+                    vista.getTxtDesde2().getText().trim()
+            );
+
+            hasta = LocalDate.parse(
+                    vista.getTxtHasta2().getText().trim()
+            );
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(
+                    vista,
+                    "Use fechas con formato AAAA-MM-DD"
+            );
+            return;
+        }
+
+        if (hasta.isBefore(desde)) {
+            JOptionPane.showMessageDialog(
+                    vista,
+                    "La fecha hasta debe ser posterior"
+            );
+            return;
+        }
+
+        Map<String, Integer> cantidades =
+                new LinkedHashMap<>();
+
+        for (Reserva reserva :
+                datos.getReservas().listarTodas()) {
+
+            if (reserva.getEstado()
+                    == Reserva.Estado.CANCELADA) {
+                continue;
+            }
+
+            if (reserva.getFecha().isBefore(desde)
+                    || reserva.getFecha().isAfter(hasta)) {
+                continue;
+            }
+
+            int numeroSemana = reserva.getFecha().get(
+                    WeekFields.ISO.weekOfWeekBasedYear()
+            );
+
+            String semana = "Semana " + numeroSemana;
+            int cantidad = 0;
+
+            if (cantidades.containsKey(semana)) {
+                cantidad = cantidades.get(semana);
+            }
+
+            cantidades.put(semana, cantidad + 1);
+        }
+
+        vista.modeloTabla2.setRowCount(0);
+
+        DefaultCategoryDataset datosGrafico =
+                new DefaultCategoryDataset();
+
+        for (String semana : cantidades.keySet()) {
+            int cantidad = cantidades.get(semana);
+
+            vista.modeloTabla2.addRow(
+                    new Object[]{semana, cantidad}
+            );
+
+            datosGrafico.addValue(
+                    cantidad,
+                    "Actividades",
+                    semana
+            );
+        }
+
+        JFreeChart grafico =
+                ChartFactory.createBarChart(
+                        "Actividades por semana",
+                        "Semana",
+                        "Cantidad",
+                        datosGrafico
+                );
+
+        ChartPanel chartPanel = new ChartPanel(grafico);
+
+        vista.getPanelGrafico2().removeAll();
+
+        vista.getPanelGrafico2().add(
+                chartPanel,
+                BorderLayout.CENTER
+        );
+
+        vista.getPanelGrafico2().revalidate();
+        vista.getPanelGrafico2().repaint();
     }
 }

@@ -12,11 +12,31 @@ public class EstadisticasPanel extends JPanel {
     private JTextField txtHasta = new JTextField(10);
     private JButton btnCargar = Themes.button("Cargar",Themes.SUCCESS);
 
-    private JTextField txtDesde2 = new JTextField(10);
-    private JTextField txtHasta2 = new JTextField(10);
-    private JButton btnCargar2 = Themes.button("Cargar",Themes.SUCCESS);
+    public JTextField getTxtDesde2() {
+        return txtDesde2;
+    }
+
+    public JTextField getTxtHasta2() {
+        return txtHasta2;
+    }
+
+    private final JTextField txtDesde2 = new JTextField(10);
+    private final JTextField txtHasta2 = new JTextField(10);
+
+    public JButton getBtnCargar2() {
+        return btnCargar2;
+    }
+
+    private final JButton btnCargar2 = Themes.button("Cargar",Themes.SUCCESS);
 
     private final JPanel panelGrafico =
+            new JPanel(new BorderLayout());
+
+    public JPanel getPanelGrafico2() {
+        return panelGrafico2;
+    }
+
+    private final JPanel panelGrafico2 =
             new JPanel(new BorderLayout());
 
     public final DefaultTableModel modeloTabla =
@@ -100,12 +120,15 @@ public class EstadisticasPanel extends JPanel {
         estadisticas.setBorder(BorderFactory.createTitledBorder("Estadisticas"));
         estadisticas.add(new JScrollPane(tabla2),BorderLayout.CENTER);
 
+        panelGrafico2.setBorder(BorderFactory.createTitledBorder("Grafico"));
+
+        panelGrafico2.setPreferredSize(new Dimension(0, 300));
 
 
 
         principal.add(fechas,BorderLayout.NORTH);
         principal.add(estadisticas,BorderLayout.CENTER);
-
+        principal.add(panelGrafico2, BorderLayout.SOUTH);
         return principal;
     }
 
