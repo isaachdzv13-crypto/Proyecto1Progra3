@@ -3,6 +3,7 @@ package controllers;
 import contexto.DatosQuemados;
 import model.CategoriaRecurso;
 import repository.ListaCategorias;
+import util.GeneradorPDF;
 import view.CategoriasPanel;
 
 import javax.swing.*;
@@ -20,8 +21,7 @@ public class CategoriasController {
         vista.btnGuardar.addActionListener(e -> guardar());
         vista.btnBorrar.addActionListener(e -> borrar());
         vista.btnLimpiar.addActionListener(e -> limpiar());
-        vista.btnImprimir.addActionListener(e ->
-                JOptionPane.showMessageDialog(vista, "Generacion de reporte en PDF pendiente de implementar."));
+        vista.btnImprimir.addActionListener(e -> GeneradorPDF.crearPDF(vista.tabla,"Documento de categorias"));
 
         vista.tabla.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) cargarSeleccion();
