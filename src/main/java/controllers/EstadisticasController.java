@@ -11,8 +11,9 @@ import view.EstadisticasPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.temporal.WeekFields;
+import java.time.temporal.TemporalAdjusters;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -180,11 +181,11 @@ public class EstadisticasController {
                 continue;
             }
 
-            int numeroSemana = reserva.getFecha().get(
-                    WeekFields.ISO.weekOfWeekBasedYear()
+            LocalDate inicioSemana = reserva.getFecha().with(
+                    TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY)
             );
 
-            String semana = "Semana " + numeroSemana;
+            String semana = inicioSemana.toString();
             int cantidad = 0;
 
             if (cantidades.containsKey(semana)) {

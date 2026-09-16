@@ -8,6 +8,7 @@ import model.Reserva;
 import repository.ListaCategorias;
 import repository.ListaRecursos;
 import repository.ListaReservas;
+import util.GeneradorPDF;
 import view.ReservasPanel;
 
 import javax.swing.*;
@@ -34,8 +35,7 @@ public class ReservasController {
         vista.btnReservar.addActionListener(e -> reservar());
         vista.btnCancelarReserva.addActionListener(e -> cancelarReserva());
         vista.btnLimpiar.addActionListener(e -> limpiar());
-        vista.btnImprimir.addActionListener(e -> JOptionPane.showMessageDialog(
-                vista, "Generacion de reporte en PDF pendiente de implementar."));
+        vista.btnImprimir.addActionListener(e -> GeneradorPDF.crearPDF(vista.tabla,"Reservas"));
 
         cargarCategorias();
         limpiar();

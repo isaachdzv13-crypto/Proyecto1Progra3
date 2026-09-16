@@ -43,7 +43,6 @@ private JPasswordField password;
     JPanel login = new JPanel();
     login.setLayout(null);
 
-    // Bienvenido
     JLabel entrada = new JLabel("Bienvenido");
     entrada.setFont(
             entrada.getFont().deriveFont(Font.BOLD, 19f)
@@ -51,21 +50,21 @@ private JPasswordField password;
     entrada.setHorizontalAlignment(SwingConstants.CENTER);
     entrada.setBounds(100, 15, 300, 30);
 
-    // Mensaje
+
     JLabel saludo = new JLabel(
             "Digite sus credenciales para ingresar."
     );
     saludo.setHorizontalAlignment(SwingConstants.CENTER);
     saludo.setBounds(75, 50, 350, 30);
 
-    // ID
+
     JLabel lblId = new JLabel("ID:");
     lblId.setBounds(100, 105, 80, 25);
 
     id = Themes.textField();
     id.setBounds(180, 105, 220, 30);
 
-    // Contraseña
+
     JLabel lblPassword = new JLabel("Contraseña:");
     lblPassword.setBounds(100, 150, 80, 25);
 
@@ -81,12 +80,12 @@ private JPasswordField password;
         });
 
 
-    // Botón
 
-JLabel demo= new JLabel("Admin: admin/1234. Usuario: 1234/1234");
-demo.setBounds(180,275,300,40);
-login.add(demo);
-    // Agregar
+
+    JLabel demo= new JLabel("Admin: admin/1234. Usuario: 1234/1234");
+    demo.setBounds(180,275,300,40);
+    login.add(demo);
+
     login.add(entrada);
     login.add(saludo);
     login.add(lblId);
@@ -94,9 +93,9 @@ login.add(demo);
     login.add(lblPassword);
     login.add(password);
     login.add(iniciar);
-        login.add(limpiar);
-        login.add(cambiarClave);
-login.add(chkMostrar);
+    login.add(limpiar);
+    login.add(cambiarClave);
+    login.add(chkMostrar);
     add(login);
 
         ImageIcon image= new ImageIcon("logo.png");

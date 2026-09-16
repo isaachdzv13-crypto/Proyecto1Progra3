@@ -34,12 +34,12 @@ public final class PersistenciaXML {
         return Files.exists(ARCHIVO);
     }
 
-    // La aplicación continúa usando data/datos.xml.
+
     public static DatosCargados cargar() throws Exception {
         return cargar(ARCHIVO);
     }
 
-    // Las pruebas pueden indicar un archivo temporal.
+
     public static DatosCargados cargar(Path archivo) throws Exception {
         Document documento = DocumentBuilderFactory.newInstance()
                 .newDocumentBuilder()
@@ -156,7 +156,7 @@ public final class PersistenciaXML {
         );
     }
 
-    // La aplicación continúa guardando en data/datos.xml.
+
     public static void guardar(Administrador administrador,
                                ListaFuncionarios funcionarios,
                                ListaCategorias categorias,
@@ -173,7 +173,6 @@ public final class PersistenciaXML {
         );
     }
 
-    // Las pruebas pueden guardar en un archivo temporal.
     public static void guardar(Path archivo,
                                Administrador administrador,
                                ListaFuncionarios funcionarios,

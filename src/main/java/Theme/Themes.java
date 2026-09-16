@@ -5,7 +5,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 public final class Themes {
 
-    // Paleta oscura de la aplicacion
     public static final Color PRIMARY = new Color(59, 130, 246);
     public static final Color DANGER = new Color(220, 38, 38);
     public static final Color SUCCESS = new Color(22, 163, 74);

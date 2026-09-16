@@ -33,7 +33,6 @@ public class CalendarizacionPanel extends JPanel {
         JPanel filtro= new JPanel(new FlowLayout(FlowLayout.LEFT,8,8));
         filtro.setBorder(BorderFactory.createTitledBorder("Filtro"));
 
-//        filtro.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
        txtFecha.setPreferredSize(new Dimension(130,25));
        cmbCategorias.setPreferredSize(new Dimension(220,28));
 
