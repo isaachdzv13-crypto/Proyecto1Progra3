@@ -5,6 +5,7 @@ import model.CategoriaRecurso;
 import model.Recurso;
 import repository.ListaCategorias;
 import repository.ListaRecursos;
+import util.GeneradorPDF;
 import view.RecursosPanel;
 
 import javax.swing.*;
@@ -25,8 +26,7 @@ public class RecursosController {
         vista.btnGuardar.addActionListener(e -> guardar());
         vista.btnBorrar.addActionListener(e -> borrar());
         vista.btnLimpiar.addActionListener(e -> limpiar());
-        vista.btnImprimir.addActionListener(e ->
-                JOptionPane.showMessageDialog(vista, "Generacion de reporte en PDF pendiente de implementar."));
+        vista.btnImprimir.addActionListener(e -> GeneradorPDF.crearPDF(vista.tabla,"Lista de Recursos"));
 
         vista.tabla.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) cargarSeleccion();

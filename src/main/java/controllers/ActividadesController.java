@@ -3,6 +3,7 @@ package controllers;
 import contexto.DatosQuemados;
 import model.Funcionario;
 import model.Reserva;
+import util.GeneradorPDF;
 import view.ActividadesPanel;
 
 import javax.swing.*;
@@ -19,8 +20,7 @@ public class ActividadesController {
         this.vista = vista;
 
         vista.btnCargar.addActionListener(e -> cargar());
-        vista.btnImprimir.addActionListener(e -> JOptionPane.showMessageDialog(
-                vista, "Reporte PDF pendiente."));
+        vista.btnImprimir.addActionListener(e -> GeneradorPDF.crearPDF(vista.tabla,"Actividades"));
 
         vista.txtFecha.setText(LocalDate.now().toString());
         cargar();

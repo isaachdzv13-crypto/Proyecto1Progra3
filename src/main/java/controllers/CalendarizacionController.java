@@ -5,6 +5,7 @@ import model.CategoriaRecurso;
 import model.Funcionario;
 import model.Recurso;
 import model.Reserva;
+import util.GeneradorPDF;
 import view.CalendarizacionPanel;
 
 import javax.swing.*;
@@ -21,8 +22,8 @@ public class CalendarizacionController {
         this.vista = vista;
 
         vista.btnCargar.addActionListener(e -> cargarCalendarizacion());
-        vista.btnImprimir.addActionListener(e -> JOptionPane.showMessageDialog(
-                vista, "Generacion de reporte en PDF pendiente de implementar."));
+        vista.btnImprimir.addActionListener(e -> GeneradorPDF.crearPDF(vista.tabla,"Calendarizacion de actividades"));
+
 
         vista.txtFecha.setText(LocalDate.now().toString());
         cargarCategorias();

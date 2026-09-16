@@ -3,6 +3,7 @@ package controllers;
 import contexto.DatosQuemados;
 import model.Funcionario;
 import repository.ListaFuncionarios;
+import util.GeneradorPDF;
 import view.FuncionariosPanel;
 
 import javax.swing.*;
@@ -18,8 +19,7 @@ public class FuncionariosController {
         vista.btnGuardar.addActionListener(e -> guardar());
         vista.btnBorrar.addActionListener(e -> borrar());
         vista.btnLimpiar.addActionListener(e -> limpiar());
-        vista.btnImprimir.addActionListener(e ->
-                JOptionPane.showMessageDialog(vista, "Generacion de reporte en PDF pendiente de implementar."));
+        vista.btnImprimir.addActionListener(e -> GeneradorPDF.crearPDF(vista.tabla,"Lista de Funcionarios"));
 
         vista.tabla.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) cargarSeleccion();
