@@ -1,0 +1,20 @@
+no quiero que hagas sobre ingenieria, hay que mantenerlo simple, si puedes empezar por darme el codigo del la carpeta Themes pero modificado para que use tonos oscuros.
+
+ocupo un apartado de persistencia en xml, para que en lugar de cargar datos quemados desde DatosQuemados cargue los valores desde archivos xml, por valores me refiero a los usuarios, recursos, etc, si yo corro el programa y en el apartado de funcionarios desde la gui guardo un funcionario deberia seguir en la lista si vuelvo a correr el programa, puedes dejar un funcionario y un administrador como una demo para poder probar el programa. Usa la estructura de la parte de XML de este proyecto que hice
+
+«la hora de inicio y la hora final deben ser un combobox, crees que sea mejor cambiar de usar LocalTime a simplemente un string?»
+
+«tengo un problema en la parte de categorias, donde no puedo eliminar la categoria de sala de juegos xq dice que hay recursos asignados pero no veo donde estan esos recursos»
+
+«este codigo hace que la primera fila de la tabla sea la que tenga los titulos de dias, y cada uno de los recursos que aparecen?»
+
+«LocalDate lunes = fecha.with(DayOfWeek.MONDAY); que hace esto»
+«okey, para que sirve maven en este proyecto?»
+
+«asi esta el proyecto actualmente, como configuro el maven»
+
+«la generacion de pdfs se buguea\»
+
+«como hago los failsafe plugin»
+«ahora si como hago para hacer las graficas, no se puede con JOptionPane?»
+
