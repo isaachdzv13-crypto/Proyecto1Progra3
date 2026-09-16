@@ -34,13 +34,22 @@ public final class PersistenciaXML {
         return Files.exists(ARCHIVO);
     }
 
+    // La aplicación continúa usando data/datos.xml.
     public static DatosCargados cargar() throws Exception {
+        return cargar(ARCHIVO);
+    }
+
+    // Las pruebas pueden indicar un archivo temporal.
+    public static DatosCargados cargar(Path archivo) throws Exception {
         Document documento = DocumentBuilderFactory.newInstance()
                 .newDocumentBuilder()
-                .parse(ARCHIVO.toFile());
+                .parse(archivo.toFile());
+
         documento.getDocumentElement().normalize();
 
-        Element adminXml = (Element) documento.getElementsByTagName("administrador").item(0);
+        Element adminXml =
+                (Element) documento.getElementsByTagName("administrador").item(0);
+
         Administrador administrador = new Administrador(
                 adminXml.getAttribute("id"),
                 adminXml.getAttribute("clave")
@@ -48,21 +57,26 @@ public final class PersistenciaXML {
 
         ListaFuncionarios funcionarios = new ListaFuncionarios();
         NodeList funcionariosXml = documento.getElementsByTagName("funcionario");
+
         for (int i = 0; i < funcionariosXml.getLength(); i++) {
             Element elemento = (Element) funcionariosXml.item(i);
+
             Funcionario funcionario = new Funcionario(
                     elemento.getAttribute("id"),
                     elemento.getAttribute("nombre"),
                     elemento.getAttribute("telefono")
             );
+
             funcionario.setClave(elemento.getAttribute("clave"));
             funcionarios.addRecurso(funcionario);
         }
 
         ListaCategorias categorias = new ListaCategorias();
         NodeList categoriasXml = documento.getElementsByTagName("categoria");
+
         for (int i = 0; i < categoriasXml.getLength(); i++) {
             Element elemento = (Element) categoriasXml.item(i);
+
             categorias.addCategoria(new CategoriaRecurso(
                     elemento.getAttribute("id"),
                     elemento.getAttribute("descripcion")
@@ -71,9 +85,14 @@ public final class PersistenciaXML {
 
         ListaRecursos recursos = new ListaRecursos();
         NodeList recursosXml = documento.getElementsByTagName("recurso");
+
         for (int i = 0; i < recursosXml.getLength(); i++) {
             Element elemento = (Element) recursosXml.item(i);
-            CategoriaRecurso categoria = categorias.buscarPorId(elemento.getAttribute("categoriaId"));
+
+            CategoriaRecurso categoria = categorias.buscarPorId(
+                    elemento.getAttribute("categoriaId")
+            );
+
             if (categoria != null) {
                 recursos.addRecurso(new Recurso(
                         elemento.getAttribute("id"),
@@ -85,8 +104,10 @@ public final class PersistenciaXML {
 
         ListaReservas reservas = new ListaReservas();
         NodeList reservasXml = documento.getElementsByTagName("reserva");
+
         for (int i = 0; i < reservasXml.getLength(); i++) {
             Element elemento = (Element) reservasXml.item(i);
+
             Reserva reserva = new Reserva(
                     elemento.getAttribute("funcionarioId"),
                     elemento.getAttribute("id"),
@@ -96,36 +117,76 @@ public final class PersistenciaXML {
                     LocalTime.parse(elemento.getAttribute("horaFin")),
                     LocalDate.parse(elemento.getAttribute("fecha"))
             );
-            reserva.setEstado(Reserva.Estado.valueOf(elemento.getAttribute("estado")));
+
+            reserva.setEstado(
+                    Reserva.Estado.valueOf(elemento.getAttribute("estado"))
+            );
 
             List<Recurso> recursosAsignados = new ArrayList<>();
             NodeList hijos = elemento.getChildNodes();
+
             for (int j = 0; j < hijos.getLength(); j++) {
                 Node hijo = hijos.item(j);
+
                 if (hijo instanceof Element
                         && "recursoAsignado".equals(((Element) hijo).getTagName())) {
+
                     Element recursoXml = (Element) hijo;
-                    Recurso recurso = recursos.buscarPorId(recursoXml.getAttribute("id"));
-                    if (recurso != null) recursosAsignados.add(recurso);
+
+                    Recurso recurso = recursos.buscarPorId(
+                            recursoXml.getAttribute("id")
+                    );
+
+                    if (recurso != null) {
+                        recursosAsignados.add(recurso);
+                    }
                 }
             }
+
             reserva.setRecursos(recursosAsignados);
             reservas.add(reserva);
         }
 
-        return new DatosCargados(administrador, funcionarios, categorias, recursos, reservas);
+        return new DatosCargados(
+                administrador,
+                funcionarios,
+                categorias,
+                recursos,
+                reservas
+        );
     }
 
+    // La aplicación continúa guardando en data/datos.xml.
     public static void guardar(Administrador administrador,
                                ListaFuncionarios funcionarios,
                                ListaCategorias categorias,
                                ListaRecursos recursos,
                                ListaReservas reservas) throws Exception {
-        Files.createDirectories(ARCHIVO.getParent());
+
+        guardar(
+                ARCHIVO,
+                administrador,
+                funcionarios,
+                categorias,
+                recursos,
+                reservas
+        );
+    }
+
+    // Las pruebas pueden guardar en un archivo temporal.
+    public static void guardar(Path archivo,
+                               Administrador administrador,
+                               ListaFuncionarios funcionarios,
+                               ListaCategorias categorias,
+                               ListaRecursos recursos,
+                               ListaReservas reservas) throws Exception {
+
+        Files.createDirectories(archivo.getParent());
 
         Document documento = DocumentBuilderFactory.newInstance()
                 .newDocumentBuilder()
                 .newDocument();
+
         Element raiz = documento.createElement("sistemaReservas");
         documento.appendChild(raiz);
 
@@ -136,6 +197,7 @@ public final class PersistenciaXML {
 
         Element funcionariosXml = documento.createElement("funcionarios");
         raiz.appendChild(funcionariosXml);
+
         for (Funcionario funcionario : funcionarios.listarTodos()) {
             Element elemento = documento.createElement("funcionario");
             elemento.setAttribute("id", funcionario.getId());
@@ -147,6 +209,7 @@ public final class PersistenciaXML {
 
         Element categoriasXml = documento.createElement("categorias");
         raiz.appendChild(categoriasXml);
+
         for (CategoriaRecurso categoria : categorias.listarTodas()) {
             Element elemento = documento.createElement("categoria");
             elemento.setAttribute("id", categoria.getId());
@@ -156,40 +219,82 @@ public final class PersistenciaXML {
 
         Element recursosXml = documento.createElement("recursos");
         raiz.appendChild(recursosXml);
+
         for (Recurso recurso : recursos.listarTodos()) {
             Element elemento = documento.createElement("recurso");
             elemento.setAttribute("id", recurso.getId());
-            elemento.setAttribute("categoriaId", recurso.getCategoria().getId());
-            elemento.setAttribute("descripcion", recurso.getDescripcion());
+            elemento.setAttribute(
+                    "categoriaId",
+                    recurso.getCategoria().getId()
+            );
+            elemento.setAttribute(
+                    "descripcion",
+                    recurso.getDescripcion()
+            );
             recursosXml.appendChild(elemento);
         }
 
         Element reservasXml = documento.createElement("reservas");
         raiz.appendChild(reservasXml);
+
         for (Reserva reserva : reservas.listarTodas()) {
             Element elemento = documento.createElement("reserva");
+
             elemento.setAttribute("id", reserva.getIdReserva());
-            elemento.setAttribute("funcionarioId", reserva.getIdFuncionario());
-            elemento.setAttribute("descripcion", reserva.getDescripcion());
-            elemento.setAttribute("actividad", reserva.getActividad());
-            elemento.setAttribute("fecha", reserva.getFecha().toString());
-            elemento.setAttribute("horaInicio", reserva.getHoraInicio().toString());
-            elemento.setAttribute("horaFin", reserva.getHoraFin().toString());
-            elemento.setAttribute("estado", reserva.getEstado().name());
+            elemento.setAttribute(
+                    "funcionarioId",
+                    reserva.getIdFuncionario()
+            );
+            elemento.setAttribute(
+                    "descripcion",
+                    reserva.getDescripcion()
+            );
+            elemento.setAttribute(
+                    "actividad",
+                    reserva.getActividad()
+            );
+            elemento.setAttribute(
+                    "fecha",
+                    reserva.getFecha().toString()
+            );
+            elemento.setAttribute(
+                    "horaInicio",
+                    reserva.getHoraInicio().toString()
+            );
+            elemento.setAttribute(
+                    "horaFin",
+                    reserva.getHoraFin().toString()
+            );
+            elemento.setAttribute(
+                    "estado",
+                    reserva.getEstado().name()
+            );
 
             for (Recurso recurso : reserva.getRecursos()) {
-                Element asignado = documento.createElement("recursoAsignado");
+                Element asignado =
+                        documento.createElement("recursoAsignado");
+
                 asignado.setAttribute("id", recurso.getId());
                 elemento.appendChild(asignado);
             }
+
             reservasXml.appendChild(elemento);
         }
 
-        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        Transformer transformer =
+                TransformerFactory.newInstance().newTransformer();
+
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-        transformer.transform(new DOMSource(documento), new StreamResult(ARCHIVO.toFile()));
+        transformer.setOutputProperty(
+                "{http://xml.apache.org/xslt}indent-amount",
+                "4"
+        );
+
+        transformer.transform(
+                new DOMSource(documento),
+                new StreamResult(archivo.toFile())
+        );
     }
 
     public static class DatosCargados {
