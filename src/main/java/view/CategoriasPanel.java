@@ -40,9 +40,9 @@ public class CategoriasPanel extends JPanel {
         busqueda.add(txtBuscarDescripcion);
         busqueda.add(btnBuscar);
         busqueda.add(btnImprimir);
-        txtBuscarDescripcion.setPreferredSize(new Dimension(200, 26));
 
-        JPanel formulario = new JPanel(new GridLayout(1, 4, 6, 6));
+
+        JPanel formulario = new JPanel(new FlowLayout(FlowLayout.LEFT));
         formulario.setBorder(BorderFactory.createTitledBorder("Categoria"));
         formulario.add(new JLabel("ID:"));
         formulario.add(txtId);

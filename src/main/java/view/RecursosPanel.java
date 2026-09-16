@@ -45,9 +45,9 @@ public class RecursosPanel extends JPanel {
         busqueda.add(btnBuscar);
         busqueda.add(btnImprimir);
         cmbFiltroCategoria.setPreferredSize(new Dimension(180, 26));
-        txtBuscarDescripcion.setPreferredSize(new Dimension(160, 26));
 
-        JPanel formulario = new JPanel(new GridLayout(1, 6, 6, 6));
+
+        JPanel formulario = new JPanel(new FlowLayout(FlowLayout.LEFT));
         formulario.setBorder(BorderFactory.createTitledBorder("Recurso"));
         formulario.add(new JLabel("ID:"));
         formulario.add(txtId);

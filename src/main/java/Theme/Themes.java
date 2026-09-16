@@ -97,6 +97,7 @@ public final class Themes {
         campo.setForeground(TEXT);
         campo.setBackground(INPUT);
         campo.setCaretColor(TEXT);
+        campo.setPreferredSize(new Dimension(160,26));
         campo.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(BORDER),
                 new EmptyBorder(5, 8, 5, 8)
