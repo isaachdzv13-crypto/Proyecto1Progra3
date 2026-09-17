@@ -1,8 +1,10 @@
 package view;
 
+import Theme.Themes;
 import controllers.ActividadesController;
 import controllers.CalendarizacionController;
 import controllers.EstadisticasController;
+import controllers.LoginController;
 import controllers.ReservasController;
 import model.Funcionario;
 
@@ -42,7 +44,19 @@ public class FrameFuncionarioPrincipal extends JFrame {
         new EstadisticasController(estadisticasPanel);
         tabs.add("Estadisticas",estadisticasPanel);
 
-        add(tabs);
+        JButton cerrarSesion = Themes.button("Cerrar Sesion",Themes.DANGER);
+        cerrarSesion.addActionListener(e -> {
+            LoginFrame login = new LoginFrame();
+            new LoginController(login, null);
+            login.setVisible(true);
+            dispose();
+        });
+
+        JPanel barraSuperior = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        barraSuperior.add(cerrarSesion);
+
+        add(barraSuperior, BorderLayout.NORTH);
+        add(tabs, BorderLayout.CENTER);
 
 
     }

@@ -1,5 +1,6 @@
 package view;
 
+import Theme.Themes;
 import controllers.*;
 import model.Administrador;
 
@@ -43,9 +44,9 @@ public class FrameAdminPrincipal extends JFrame {
         new ActividadesController(actividades);
         tabs.add("Actividades",actividades);
 
-EstadisticasPanel estadisticasPanel= new EstadisticasPanel();
-new EstadisticasController(estadisticasPanel);
-tabs.add("Estadisticas",estadisticasPanel);
+        EstadisticasPanel estadisticasPanel= new EstadisticasPanel();
+        new EstadisticasController(estadisticasPanel);
+        tabs.add("Estadisticas",estadisticasPanel);
 
 
         tabs.addChangeListener(e -> {
@@ -54,7 +55,19 @@ tabs.add("Estadisticas",estadisticasPanel);
             }
         });
 
-add(tabs);
+        JButton cerrarSesion = Themes.button("Cerrar Sesion",Themes.DANGER);
+        cerrarSesion.addActionListener(e -> {
+            LoginFrame login = new LoginFrame();
+            new LoginController(login, null);
+            login.setVisible(true);
+            dispose();
+        });
+
+        JPanel barraSuperior = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        barraSuperior.add(cerrarSesion);
+
+        add(barraSuperior, BorderLayout.NORTH);
+        add(tabs, BorderLayout.CENTER);
 
     }
 }
