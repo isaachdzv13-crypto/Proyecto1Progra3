@@ -1,76 +1,70 @@
 package accesoDatos;
 
+import model.CategoriaRecurso;
 import model.Funcionario;
+
+import java.util.ArrayList;
 
 public class PruebaConexion extends Servicio {
 
     public static void main(String[] args) {
 
-        ServicioFuncionarios servicio = new ServicioFuncionarios();
-        String id = "PRUEBA-JDBC-01";
+        ServicioCategoria servicio = new ServicioCategoria();
+        String descripcion = "Categoria prueba JDBC";
 
         try {
-            if (servicio.buscarPorId(id) != null) {
-                System.out.println("Ese ID ya existe. Usa otro para la prueba.");
+            if (!servicio.buscarPorDescripcion(descripcion).isEmpty()) {
+                System.out.println("Ya existe una categoria de prueba.");
                 return;
             }
 
-            Funcionario funcionario = new Funcionario(
-                    id,
-                    "Funcionario de prueba",
-                    "8888-9999"
-            );
+            servicio.insertar(descripcion);
+            System.out.println("Categoria insertada.");
 
-            servicio.insertar(funcionario);
-            System.out.println("Funcionario insertado.");
+            ArrayList<CategoriaRecurso> encontradas =
+                    servicio.buscarPorDescripcion(descripcion);
 
-            Funcionario encontrado = servicio.buscarPorId(id);
-
-            if (encontrado == null) {
+            if (encontradas.size() != 1) {
                 throw new IllegalStateException(
-                        "No se encontro el funcionario insertado."
+                        "No se encontro una unica categoria de prueba."
                 );
             }
 
-            System.out.println("Encontrado: " + encontrado.getNombre());
+            CategoriaRecurso categoria = encontradas.get(0);
+            String id = categoria.getId();
 
-            encontrado.setNombre("Nombre actualizado");
-            servicio.modificar(encontrado);
+            System.out.println("ID generado por Oracle: " + id);
 
-            encontrado = servicio.buscarPorId(id);
+            categoria.setDesc("Categoria JDBC modificada");
+            servicio.modificar(categoria);
 
-            if (encontrado == null
-                    || !"Nombre actualizado".equals(encontrado.getNombre())) {
+            boolean modificada = false;
 
+            for (CategoriaRecurso c : servicio.listar()) {
+                System.out.println(c.getId() + " - " + c.getDesc());
+
+                if (id.equals(c.getId())
+                        && "Categoria JDBC modificada".equals(c.getDesc())) {
+                    modificada = true;
+                }
+            }
+
+            if (!modificada) {
                 throw new IllegalStateException(
-                        "No se guardo el cambio de nombre."
+                        "No se guardo la modificacion."
                 );
             }
 
             System.out.println("Modificacion comprobada.");
 
-            boolean aparece = false;
-
-            for (Funcionario f : servicio.listar()) {
-                System.out.println(f.getId() + " - " + f.getNombre());
-
-                if (id.equals(f.getId())) {
-                    aparece = true;
-                }
-            }
-
-            if (!aparece) {
-                throw new IllegalStateException(
-                        "El funcionario no aparece en la lista."
-                );
-            }
-
             servicio.eliminar(id);
 
-            if (servicio.buscarPorId(id) != null) {
-                throw new IllegalStateException(
-                        "El funcionario no se elimino."
-                );
+            for (CategoriaRecurso c : servicio.listar()) {
+                if (id.equals(c.getId())) {
+                    throw new IllegalStateException(
+                            "La categoria no se elimino."
+                    );
+                }
             }
 
             System.out.println("Eliminacion comprobada.");
