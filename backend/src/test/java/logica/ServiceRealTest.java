@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ServiceRealTest {
 
-    private final ServiceMySQL service = new ServiceMySQL();
+    private final ServiceReal service = new ServiceReal();
 
     private ServiceException reservar(String actividad, LocalDate fecha, LocalTime inicio,
                                       LocalTime fin, List<String> categorias) {

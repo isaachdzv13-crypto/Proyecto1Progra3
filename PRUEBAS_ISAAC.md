@@ -1,6 +1,6 @@
 # Pruebas que solo se pueden hacer con Oracle (Isaac)
 
-Preparacion: ejecutar `sql/Proyecto2_oracle.sql` en SQL Developer, definir la variable de entorno `ORACLE_PASSWORD` y dejar `capaDatos=isaac` en `backend/backend.properties`.
+Preparacion: ejecutar `sql/Proyecto2_oracle.sql` en SQL Developer, definir la variable de entorno `ORACLE_PASSWORD`.
 
 1. Ejecutar `Main` del backend. Debe imprimir "Backend escuchando en el puerto 5000".
 2. Ejecutar `Main` del frontend dos veces (dos ventanas) e ingresar a `localhost:5000`.
