@@ -11,31 +11,18 @@ public class Main {
     public static void main(String[] args) {
         Themes.install();
 
-        String servidor = "localhost:5000";
-        if (args.length > 0) {
-            servidor = args[0];
-        } else {
-            String respuesta = JOptionPane.showInputDialog(null,
-                    "Servidor (host:puerto)", "Conexion al Backend", JOptionPane.QUESTION_MESSAGE);
-            if (respuesta == null) {
-                return;
-            }
-            if (!respuesta.isBlank()) {
-                servidor = respuesta.trim();
-            }
+        String host = JOptionPane.showInputDialog(
+                null,
+                "Dirección del servidor:",
+                "localhost"
+        );
+
+        if (host == null || host.isBlank()) {
+            return;
         }
 
-        String host = servidor;
+        host = host.trim();
         int puerto = 5000;
-        if (servidor.contains(":")) {
-            host = servidor.substring(0, servidor.indexOf(":"));
-            try {
-                puerto = Integer.parseInt(servidor.substring(servidor.indexOf(":") + 1).trim());
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "El puerto no es valido.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        }
 
         try {
             Sesion.conectar(host, puerto);
