@@ -82,7 +82,7 @@ private JPasswordField password;
 
 
 
-    JLabel demo= new JLabel("Admin: admin/1234. Usuario: 1234/1234");
+    JLabel demo= new JLabel("Admin: admin/admin123. Usuario: 1000/1000");
     demo.setBounds(180,275,300,40);
     login.add(demo);
 
