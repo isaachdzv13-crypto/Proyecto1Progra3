@@ -73,7 +73,7 @@ public class LoginController {
 
         }
     }
-//aa
+
     private Usuario validarCredenciales(String id, String clave) {
         return service.login(id, clave);
     }
