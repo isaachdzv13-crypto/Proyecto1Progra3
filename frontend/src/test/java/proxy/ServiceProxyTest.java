@@ -70,7 +70,7 @@ class ServiceProxyTest {
                 salida.reset();
             }
         } catch (Exception e) {
-            // el cliente cerro la conexion
+
         }
     }
 
